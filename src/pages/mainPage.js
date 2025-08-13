@@ -37,17 +37,33 @@ export default function createPage(){
 
     const temp = document.createElement("p");
     temp.id = "temp";
+    const feel_temp = document.createElement("p");
+    feel_temp.id = "feel_temp";
     const rain = document.createElement("p")
     rain.id = "rain";
     const humidity = document.createElement("p");
     humidity.id = "humidity";
+    const windspeed = document.createElement("p");
+    windspeed.id = "windspeed";
+    const uvindex = document.createElement("p");
+    uvindex.id = "uvindex";
+    const visibility = document.createElement("p");
+    visibility.id = "visibility";
+    const sunset = document.createElement("p");
+    sunset.id = "sunset";
+     
     
 
     dataDiv.appendChild(location);
     dataDiv.appendChild(grid);
     grid.appendChild(temp);
+    grid.appendChild(feel_temp);
     grid.appendChild(rain);
     grid.appendChild(humidity);
+    grid.appendChild(windspeed);
+    grid.appendChild(uvindex);
+    grid.appendChild(visibility);
+    grid.appendChild(sunset);
 
     content.appendChild(searchDiv);
     content.appendChild(dataDiv);
@@ -65,7 +81,7 @@ async function setWeather(location) {
     console.log(data); // Logs the weather data JSON
     const conditions = data.currentConditions;
     setBackground(conditions.precip,conditions.temp)
-    setData(data.resolvedAddress,conditions.temp,conditions.precip,conditions.humidity)
+    setData(data.resolvedAddress,conditions.temp,conditions.precip,conditions.humidity,conditions.feelslike,conditions.windspeed,conditions.uvindex,conditions.visibility,conditions.sunset)
     } catch (error) {
     console.error('Error fetching weather:', error);
   }
@@ -81,16 +97,26 @@ function setBackground(precip,temp){
     }
 }
 
-function setData(addy,tempature,rainAmt,hum){
+function setData(addy,tempature,rainAmt,hum,feelslike,wind,uv,vis,sun){
     const loc = document.getElementById("location");
     const temp = document.getElementById("temp");
     const rain = document.getElementById("rain");
+    const feelTemp = document.getElementById("feel_temp");
     const humidity = document.getElementById("humidity");
+    const windspeed = document.getElementById("windspeed");
+    const uvi = document.getElementById("uvindex");
+    const visibility = document.getElementById("visibility");
+    const sunset = document.getElementById("sunset");
 
     loc.innerHTML = addy;
     temp.innerHTML = "Tempature: " + tempature;
+    feelTemp.innerHTML = "Feels like: " + feelslike;
+    windspeed.innerHTML = "Windspeed: " + wind
     rain.innerHTML = "Rain: " + rainAmt;
     humidity.innerHTML = "Humidity: " + hum;
+    uvi.innerHTML = "UV Index: " + uv;
+    visibility.innerHTML = "Visibility: " + vis;
+    sunset.innerHTML = "Sunset: " + sun;
 }
 // process.env.API_KEY
 

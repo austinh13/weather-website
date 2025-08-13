@@ -42,8 +42,11 @@ body{
 .dataDiv{
     width: 90vw;
     height: 65vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-    background-color: rgba(220, 220, 220, 0.4);
+    background-color: rgba(180, 180, 180, 0.6);
 }
 
 .location{
@@ -51,12 +54,13 @@ body{
 }
 
 .grid{
-    width: 80vw;
-    height: 50vh;
+    width: 60vw;
+    height: 40vh;
     display: grid;
-    grid-template-columns: repeat(4,15vw);
-    grid-template-rows: repeat(2,12vh);
+    place-content: center; /* centers the entire grid inside the container */
+    grid-template-columns: repeat(4,20vw);
+    grid-template-rows: repeat(2,16vh);
     padding: 2vh 5vw 2vh 5vw;
 
-    font-size: 2vw;
+    font-size: 2.5vw;
 }
