@@ -1,5 +1,6 @@
 import rainy_day from "../images/rainy-day.jpg"
 import sunnyDay from "../images/sunnyDay.jpg"
+import spring from "../images/Spring.jpg"
 export default function createPage(){
     const content = document.getElementById("content");
     setWeather("Texas");
@@ -10,7 +11,7 @@ export default function createPage(){
     const searchBar = document.createElement("input");
     searchBar.type = "text";
     searchBar.classList.add("searchBar");
-    searchBar.placeholder = "Enter Place and Press Enter!";
+    searchBar.placeholder = "Enter Location and Press Enter!";
 
     searchBar.addEventListener("keydown", (event) => {
          if (event.key === 'Enter') {
@@ -80,7 +81,7 @@ async function setWeather(location) {
     const data = await response.json();
     console.log(data); // Logs the weather data JSON
     const conditions = data.currentConditions;
-    setBackground(conditions.precip,conditions.temp)
+    setBackground(conditions.precipprob,conditions.temp)
     setData(data.resolvedAddress,conditions.temp,conditions.precip,conditions.humidity,conditions.feelslike,conditions.windspeed,conditions.uvindex,conditions.visibility,conditions.sunset)
     } catch (error) {
     console.error('Error fetching weather:', error);
@@ -90,7 +91,12 @@ async function setWeather(location) {
 function setBackground(precip,temp){
     const content = document.getElementById("content");
     if(precip == 0){
-    content.style.backgroundImage = `url(${sunnyDay})`;
+      if(temp >= 80){
+        content.style.backgroundImage = `url(${sunnyDay})`;
+      }
+      else if(temp >= 45){
+        content.style.backgroundImage = `url(${spring})`;
+      }
     }
     else{
     content.style.backgroundImage = `url(${rainy_day})`;
